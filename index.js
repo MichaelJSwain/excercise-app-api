@@ -1,22 +1,17 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-require('dotenv').config()
+require('dotenv').config();
+
+const Workout = require("./Models/Workout");
+const Exercise = require("./Models/Exercise");
+
+const users = require("./fakeData/users");
+const workouts = require("./fakeData/workouts");
 
 const PORT = process.env.PORT;
 
 app.use(bodyParser.json());
-
-const users = [
-    {
-        username: "Dave",
-        password: "Dave"
-    },
-    {
-        username: "Becky",
-        password: "Becky"
-    }
-]
 
 // USER - Login
 app.post("/exerciseApp/api/user/login", (req, res) => {
@@ -59,7 +54,15 @@ app.post("/exerciseApp/api/user/register", (req, res) => {
     }
     users.push(newUser);
     return res.status(200).json(newUser);
-})
+});
+
+// WORKOUTS - INDEX
+app.get("/exerciseApp/api/workouts", (req, res) => {
+    console.log("workouts index endpoint");
+    console.log("req query = ", req.query);
+
+    res.status(200).json(workouts);
+});
 
 app.listen(PORT, () => {
     console.log(`app listening on port ${PORT}`);
