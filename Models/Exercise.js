@@ -5,7 +5,9 @@ const exerciseSchema = new Schema({
     name: String,
     preparation: Array,
     instructions: Array,
-    reps: Number
+    timer: Number,
+    reps: Number,
+    sets: Number
 });
 
 const Exercise = mongoose.model("Exercise", exerciseSchema);
