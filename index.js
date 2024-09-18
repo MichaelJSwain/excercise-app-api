@@ -2,6 +2,14 @@ const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
 require('dotenv').config();
+const cors = require('cors');
+
+const corsOptions = {
+    origin: 'http://localhost:5173',//(https://your-client-app.com)
+    optionsSuccessStatus: 200,
+  };
+ 
+  app.use(cors(corsOptions));
 
 const Workout = require("./Models/Workout");
 const Exercise = require("./Models/Exercise");
