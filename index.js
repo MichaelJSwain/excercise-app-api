@@ -72,13 +72,13 @@ app.get("/exerciseApp/api/workouts/:id", (req, res) => {
     let result = false;
 
     workouts.forEach(workout => {
-        if (`${workout._id}` === id) {
+        if (`${workout._id}` == id) {
             result = workout;
         }
     });
     
     if (result) {
-        return res.status(200).json(workouts);
+        return res.status(200).json(result);
     } else {
         return res.status(400).json("could not find workout");
     }
