@@ -64,13 +64,34 @@ app.post("/exerciseApp/api/user/register", (req, res) => {
     return res.status(200).json(newUser);
 });
 
+// WORKOUTS - SHOW
+app.get("/exerciseApp/api/workouts/:id", (req, res) => {
+    console.log("SHOW endpoint");
+    const {id} = req.params;
+    
+    let result = false;
+
+    workouts.forEach(workout => {
+        if (`${workout._id}` === id) {
+            result = workout;
+        }
+    });
+    
+    if (result) {
+        return res.status(200).json(workouts);
+    } else {
+        return res.status(400).json("could not find workout");
+    }
+});
+
 // WORKOUTS - INDEX
 app.get("/exerciseApp/api/workouts", (req, res) => {
-    console.log("workouts index endpoint");
-    console.log("req query = ", req.query);
+    console.log("INDEX endpoint");
 
     res.status(200).json(workouts);
 });
+
+
 
 app.listen(PORT, () => {
     console.log(`app listening on port ${PORT}`);
