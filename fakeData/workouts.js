@@ -77,6 +77,7 @@ const fullBodyBeginners = new Workout(
             Ideal for vacations or home workouts. You don't need equipment
             for this routine.
         `,
+        image: "https://media.self.com/photos/61bcd0e05aed92fc4251b026/4:3/w_2560%2Cc_limit/GettyImages-1213234926.jpeg",
         duration: "15 mins",
         difficulty: "Beginner",
         equipment: "No equipment",
@@ -95,6 +96,7 @@ const corePlankWorkout = new Workout(
             the strengthening of the whole body. The workout consists of 6 exercises that you do for 
             1 minute before going to the next.
         `,
+        image: "https://media.self.com/photos/61bcd0e05aed92fc4251b026/4:3/w_2560%2Cc_limit/GettyImages-1213234926.jpeg",
         duration: "9 mins",
         difficulty: "Intermediate",
         equipment: "No equipment",
