@@ -91,6 +91,11 @@ app.get("/exerciseApp/api/workouts", (req, res) => {
     res.status(200).json(workouts);
 });
 
+// FAVOURITES - CREATE
+app.post("/exerciseApp/api/favourites", (req, res) => {
+    console.log("request to favourites endpoint = ");
+})
+
 
 
 app.listen(PORT, () => {
