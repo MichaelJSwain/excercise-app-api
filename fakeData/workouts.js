@@ -65,7 +65,54 @@ const handWalk = new Exercise({
     reps: 0,
     sets: 1
 });
+const airLunge = new Exercise({
+    name: "Air Lunge, alternating",
+    preparation: "Make sure that you have enough space around you.",
+    instructions: [
+        "Stand with your feet under your hips",
+        "Take a big step forward and bend your back knee towards the floor.",
+        "Simultaneously bend your front knee until it reaches a 90 degree angle.",
+        "Push your front heel against the floor as you come up."
+    ],
+    timer: 60, // seconds
+    reps: 0,
+    sets: 1
+})
 
+const hipBridge = new Exercise({
+    name: "Hip Bridge",
+    preparation: "Lay an exercise mat down so you can lie on it",
+    instructions: [
+        "Lie on your back with bended knees, feet on the floor.",
+        "Press the heels against the floor and your hips up.",
+        "Keep your abs tight and squeeze your glutes together.",
+        "let your hips sink down again"
+    ],
+    timer: 60, // seconds
+    reps: 0,
+    sets: 1
+})
+const jumpSquats = new Exercise({
+    name: "Jump Squats",
+    preparation: "Make sure that you have enough space around you.",
+    instructions: [
+        "Begin with your feet at shoulder width, the toes pointing a little outside.",
+        "Bend your knees and let your body sink in a squat position, keep your back straight and your chest up.",
+        "Push through your feet, jump from the ground while you stretch your hips and knees.",
+        "land softly and bend your knees to receive the impact."
+    ],
+    timer: 60, // seconds
+    reps: 0,
+    sets: 1
+})
+const placeholder = new Exercise({
+    name: "",
+    preparation: "",
+    instructions: [],
+    timer: 60, // seconds
+    reps: 0,
+    sets: 1
+})
 
 const fullBodyBeginners = new Workout(
     {
@@ -116,6 +163,7 @@ const lowerBodyUltimateLegShred = new Workout(
             then 16 reps in the second round and finally 12 reps in the last round. Perform each rep slowly and controlled
             and enjoy the feeling that you're getting stronger.
         `,
+        image: "https://media.self.com/photos/61bcd0e05aed92fc4251b026/4:3/w_2560%2Cc_limit/GettyImages-1213234926.jpeg",
         duration: "31 mins",
         difficulty: "Intermediate",
         equipment: "No equipment",
@@ -126,12 +174,36 @@ const lowerBodyUltimateLegShred = new Workout(
         goals: ["Shape & tone", "Weight loss", "Muscle building", "Get fitter"]
     }
 );
+const fullBodyIntermediate = new Workout(
+    {
+        name: "Full body - circuit for intermediate",
+        description: `
+            Full body circuit training for everyone! This circuit consists of 10 exercises that are 
+            completed in 1 minute intervals with 15 seconds rest in between. There are 2 rounds in total. Ideal for 
+            vacations or home workouts, as you don't need any equipment for this routine.
+        `,
+        image: "https://cdn2.activebeat.com/eyJidWNrZXQiOiJvbS1wdWItc3RvcmFnZSIsImtleSI6ImFjdGl2ZWJlYXQvd3AtY29udGVudC91cGxvYWRzLzIwMjEvMDgvc2h1dHRlcnN0b2NrXzE0MTA2Njg2NTcuanBnIiwiZWRpdHMiOnsid2VicCI6eyJxdWFsaXR5Ijo4MH19fQ==",
+        duration: "31 mins",
+        difficulty: "Intermediate",
+        equipment: "No equipment",
+        type: "HIIT",
+        format: "Individual workout",
+        bodyArea: "Full body",
+        trainingSet: [airLunge, pushUpsKnees, sitUp, hipBridge, jumpSquats, lateralRaise, handWalk],
+        goals: ["Shape & tone", "Weight loss"]
+    }
+);
 
 
 const workouts = [
     fullBodyBeginners,
     corePlankWorkout,
-    lowerBodyUltimateLegShred
+    lowerBodyUltimateLegShred,
+    fullBodyIntermediate,
+    fullBodyBeginners,
+    corePlankWorkout,
+    lowerBodyUltimateLegShred,
+    fullBodyIntermediate
 ];
 
 module.exports = workouts;

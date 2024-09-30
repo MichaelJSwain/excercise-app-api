@@ -41,7 +41,7 @@ app.post("/exerciseApp/api/user/login", (req, res) => {
     });
 
     if (result) {
-        return res.status(200).json({user: {username, password}});
+        return res.status(200).json({user: result});
     } else {
         return res.status(400).json({message: "User not found"});
     }
