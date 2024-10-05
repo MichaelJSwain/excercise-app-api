@@ -8,9 +8,15 @@ const userSchema = new Schema({
     avatar: String,
     dob: Date,
     joinDate: Date,
-    favourites: Array,
-    completed: Array,
-    current: Array
+    favourites: [
+        {type: mongoose.Types.ObjectId, ref: "Workout"}
+    ],
+    completed: [
+        {type: mongoose.Types.ObjectId, ref: "Workout"}
+    ],
+    current: [
+        {type: mongoose.Types.ObjectId, ref: "Workout"}
+    ]
 });
 
 const User = mongoose.model("User", userSchema);

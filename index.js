@@ -1,11 +1,13 @@
 const express = require("express");
 const app = express();
+const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 require('dotenv').config();
 const cors = require('cors');
+const seedDB = require("./fakeData/seedDB");
 
 const corsOptions = {
-    origin: 'http://localhost:5173',//(https://your-client-app.com)
+    origin: 'http://localhost:5173',
     optionsSuccessStatus: 200,
   };
  
@@ -18,8 +20,10 @@ const users = require("./fakeData/users");
 const workouts = require("./fakeData/workouts");
 
 const PORT = process.env.PORT;
+const DB_CONNECTION_STRING = process.env.DB_CONNECTION_STRING;
 
 app.use(bodyParser.json());
+
 
 // USER - Login
 app.post("/exerciseApp/api/user/login", (req, res) => {
@@ -85,10 +89,17 @@ app.get("/exerciseApp/api/workouts/:id", (req, res) => {
 });
 
 // WORKOUTS - INDEX
-app.get("/exerciseApp/api/workouts", (req, res) => {
+app.get("/exerciseApp/api/workouts", async (req, res) => {
     console.log("INDEX endpoint");
 
-    res.status(200).json(workouts);
+    try {
+        const workouts = await Workout.find({});
+        console.log("successfully found workouts!");
+        res.status(200).json(workouts);
+    } catch(e) {
+        console.log("error trying to find workouts");
+        return res.status(400).json("can't get workouts. Please try again later");
+    }
 });
 
 // FAVOURITES - CREATE
@@ -96,7 +107,14 @@ app.post("/exerciseApp/api/favourites", (req, res) => {
     console.log("request to favourites endpoint = ");
 })
 
+mongoose.connect(DB_CONNECTION_STRING);
 
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "connect error:"));
+db.once("open", () => {
+    console.log("Database connected!!");
+    // seedDB();
+});
 
 app.listen(PORT, () => {
     console.log(`app listening on port ${PORT}`);

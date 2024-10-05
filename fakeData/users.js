@@ -1,13 +1,25 @@
 const users = [
     {
         username: "Dave",
+        email: "dave@mail.com",
         password: "Dave",
-        favourites: []
+        avatar: "",
+        dob: "",
+        joinDate: "",
+        favourites: [],
+        completed: [],
+        current: []
     },
     {
         username: "Becky",
+        email: "becky@mail.com",
         password: "Becky",
-        favourites: []
+        avatar: "",
+        dob: "",
+        joinDate: "",
+        favourites: [],
+        completed: [],
+        current: []
     }
 ];
 
