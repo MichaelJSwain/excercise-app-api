@@ -123,6 +123,24 @@ app.post("/exerciseApp/api/workouts/completed", async (req, res) => {
 
 });
 
+// WORKOUTS - CURRENT / IN PROGRESS
+app.post("/exerciseApp/api/workouts/current", async (req, res) => {
+    console.log("hit the current workout endpoint");
+    const {userId, workoutId} = req.body;
+
+    try {
+        const foundUser = await User.findById(userId);
+        const foundWorkout = await Workout.findById(workoutId);
+        foundUser.current.push(foundWorkout);
+        await foundUser.save();
+        console.log("successfully save current workout");
+        return res.status(200).json({message: "successfully saved current workout"});
+    } catch(e) {
+        console.log("error trying to save current workout");
+        return res.status(400).json({message: "error trying to save current workout"});
+    }
+});
+
 // FAVOURITES - CREATE
 app.post("/exerciseApp/api/favourites", async (req, res) => {
     const {userId, workoutId} = req.body;
