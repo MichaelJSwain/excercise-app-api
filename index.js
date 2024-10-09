@@ -73,21 +73,22 @@ app.post("/exerciseApp/api/user/register", (req, res) => {
 // WORKOUTS - SHOW
 app.get("/exerciseApp/api/workouts/:id", (req, res) => {
     console.log("SHOW endpoint");
-    const {id} = req.params;
+    res.status(200).json({workout: "1"})
+    // const {id} = req.params;
     
-    let result = false;
+    // let result = false;
 
-    workouts.forEach(workout => {
-        if (`${workout._id}` == id) {
-            result = workout;
-        }
-    });
+    // workouts.forEach(workout => {
+    //     if (`${workout._id}` == id) {
+    //         result = workout;
+    //     }
+    // });
     
-    if (result) {
-        return res.status(200).json(result);
-    } else {
-        return res.status(400).json("could not find workout");
-    }
+    // if (result) {
+    //     return res.status(200).json(result);
+    // } else {
+    //     return res.status(400).json("could not find workout");
+    // }
 });
 
 // WORKOUTS - INDEX
