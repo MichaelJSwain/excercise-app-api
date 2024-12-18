@@ -1,5 +1,6 @@
 const Workout = require("../Models/Workout");
 const Exercise = require("../Models/Exercise");
+const {v4} = require("uuid");
 
 // const pushUps = new Exercise({
 //     name: "Push ups",
@@ -116,6 +117,7 @@ const placeholder = new Exercise({
 
 const fullBodyBeginners = new Workout(
     {
+        id: v4(),
         name: "Full body - circuit for beginners",
         description: `
             Full body circuit training for everyone, perfect for beginners!
@@ -137,6 +139,7 @@ const fullBodyBeginners = new Workout(
 );
 const corePlankWorkout = new Workout(
     {
+        id: v4(),
         name: "Core - plank workout",
         description: `
             This training strengthens the lateral muscles, that are essential for balance and 
@@ -156,6 +159,7 @@ const corePlankWorkout = new Workout(
 );
 const lowerBodyUltimateLegShred = new Workout(
     {
+        id: v4(),
         name: "Lower body - ultimate leg shred",
         description: `
             This is an effective at home workout for the lower body, where you only need a resistance band. 
@@ -176,6 +180,7 @@ const lowerBodyUltimateLegShred = new Workout(
 );
 const fullBodyIntermediate = new Workout(
     {
+        id: v4(),
         name: "Full body - circuit for intermediate",
         description: `
             Full body circuit training for everyone! This circuit consists of 10 exercises that are 
@@ -193,6 +198,46 @@ const fullBodyIntermediate = new Workout(
         goals: ["Shape & tone", "Weight loss"]
     }
 );
+const fullBodyAdvanced = new Workout(
+    {
+        idd: v4(),
+        name: "Full body - circuit for advanced",
+        description: `
+            Full body circuit training for everyone! This circuit consists of 10 exercises that are 
+            completed in 1 minute intervals with 15 seconds rest in between. There are 2 rounds in total. Ideal for 
+            vacations or home workouts, as you don't need any equipment for this routine.
+        `,
+        image: "https://cdn2.activebeat.com/eyJidWNrZXQiOiJvbS1wdWItc3RvcmFnZSIsImtleSI6ImFjdGl2ZWJlYXQvd3AtY29udGVudC91cGxvYWRzLzIwMjEvMDgvc2h1dHRlcnN0b2NrXzE0MTA2Njg2NTcuanBnIiwiZWRpdHMiOnsid2VicCI6eyJxdWFsaXR5Ijo4MH19fQ==",
+        duration: "31 mins",
+        difficulty: "Advanced",
+        equipment: "Club apparatus",
+        type: "HIIT",
+        format: "Individual workout",
+        bodyArea: "Full body",
+        trainingSet: [airLunge, pushUpsKnees, sitUp, hipBridge, jumpSquats, lateralRaise, handWalk],
+        goals: ["Shape & tone", "Weight loss"]
+    }
+);
+const fullBodyAdvanced2 = new Workout(
+    {
+        id: v4(),
+        name: "Full body - circuit for advanced 2",
+        description: `
+            Full body circuit training for everyone! This circuit consists of 10 exercises that are 
+            completed in 1 minute intervals with 15 seconds rest in between. There are 2 rounds in total. Ideal for 
+            vacations or home workouts, as you don't need any equipment for this routine.
+        `,
+        image: "https://cdn2.activebeat.com/eyJidWNrZXQiOiJvbS1wdWItc3RvcmFnZSIsImtleSI6ImFjdGl2ZWJlYXQvd3AtY29udGVudC91cGxvYWRzLzIwMjEvMDgvc2h1dHRlcnN0b2NrXzE0MTA2Njg2NTcuanBnIiwiZWRpdHMiOnsid2VicCI6eyJxdWFsaXR5Ijo4MH19fQ==",
+        duration: "31 mins",
+        difficulty: "Advanced",
+        equipment: "No equipment",
+        type: "HIIT",
+        format: "Individual workout",
+        bodyArea: "Full body",
+        trainingSet: [airLunge, pushUpsKnees, sitUp, hipBridge, jumpSquats, lateralRaise, handWalk],
+        goals: ["Shape & tone", "Weight loss"]
+    }
+);
 
 
 const workouts = [
@@ -200,10 +245,8 @@ const workouts = [
     corePlankWorkout,
     lowerBodyUltimateLegShred,
     fullBodyIntermediate,
-    fullBodyBeginners,
-    corePlankWorkout,
-    lowerBodyUltimateLegShred,
-    fullBodyIntermediate
+    fullBodyAdvanced,
+    fullBodyAdvanced2
 ];
 
 module.exports = workouts;

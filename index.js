@@ -5,6 +5,8 @@ const bodyParser = require("body-parser");
 require('dotenv').config();
 const cors = require('cors');
 const seedDB = require("./fakeData/seedDB");
+const workoutsSeedData = require("./fakeData/workouts");
+
 
 const corsOptions = {
     origin: 'http://localhost:5173',
@@ -28,6 +30,7 @@ app.use(bodyParser.json());
 
 // USER - Login
 app.post("/exerciseApp/api/user/login", async (req, res) => {
+    console.log(req.body)
     const {username, password} = req.body;
     if (!username) {
         return res.status(400).json("Please enter a username");
@@ -39,11 +42,23 @@ app.post("/exerciseApp/api/user/login", async (req, res) => {
 
     try {
         const user = await User.findOne({username});
+        console.log(user);
         if (!user) {
             return res.status(400).json({message: "unknown user"});
         }
         if (user.password === password) {
-            return res.status(200).json({user});
+            const userId = `${user._id.toString()}`;
+            return res.status(200).json({
+                                        _id: userId, 
+                                        username: user.username,
+                                        email: user.email,
+                                        avatar: user.avatar,
+                                        dob: user.dob,
+                                        joinDate: user.joinDate,
+                                        favourites: user.favourites,
+                                        completed: user.completed,
+                                        current: user.current
+                                    });
         } else {
             return res.status(400).json({message: "invalid email or password"});
         }
@@ -54,7 +69,7 @@ app.post("/exerciseApp/api/user/login", async (req, res) => {
 });
 
 // USER - Register
-app.post("/exerciseApp/api/user/register", (req, res) => {
+app.post("/exerciseApp/api/user/register", async (req, res) => {
     const {username, password} = req.body;
     if (!username) {
         return res.status(400).json("Please enter a username");
@@ -62,11 +77,14 @@ app.post("/exerciseApp/api/user/register", (req, res) => {
     if (!password) {
         return res.status(400).json("Please enter a password");
     }
-    const newUser = {
+    const newUser = new User({
         username,
         password
-    }
-    users.push(newUser);
+    })
+    // users.push(newUser);
+    await newUser.save();
+    console.log("new user = ", newUser);
+
     return res.status(200).json(newUser);
 });
 
@@ -95,14 +113,19 @@ app.get("/exerciseApp/api/workouts/:id", (req, res) => {
 app.get("/exerciseApp/api/workouts", async (req, res) => {
     console.log("INDEX endpoint");
 
-    try {
-        const workouts = await Workout.find({});
-        console.log("successfully found workouts!");
-        res.status(200).json(workouts);
-    } catch(e) {
-        console.log("error trying to find workouts");
-        return res.status(400).json("can't get workouts. Please try again later");
-    }
+
+    return res.status(200).json(workoutsSeedData);;
+
+    // try {
+    //     const workouts = await Workout.find({});
+    //     console.log("successfully found workouts!", workouts.length);
+    //     // setTimeout(() => {    
+    //         res.status(200).json(workouts);
+    //     // }, 2000);
+    // } catch(e) {
+    //     console.log("error trying to find workouts");
+    //     return res.status(400).json("can't get workouts. Please try again later");
+    // }
 });
 
 // WORKOUTS - COMPLETED
