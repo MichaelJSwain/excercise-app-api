@@ -239,6 +239,16 @@ const fullBodyAdvanced2 = new Workout(
     }
 );
 
+const exercises = [
+    airSquat,
+    pushUpsKnees,
+    sitUp,
+    lateralRaise,
+    handWalk,
+    airLunge,
+    hipBridge,
+    jumpSquats
+];
 
 const workouts = [
     fullBodyBeginners,
