@@ -6,6 +6,7 @@ require('dotenv').config();
 const cors = require('cors');
 const seedDB = require("./fakeData/seedDB");
 const workoutsSeedData = require("./fakeData/workouts");
+const {v4} = require("uuid");
 
 const corsOptions = {
     origin: 'http://localhost:5173',
@@ -215,6 +216,41 @@ app.get("/exerciseApp/api/exercises", async (req, res) => {
     } catch (e) {
         return res.status(400).json({message: "error fetching exercises"});
     }
+});
+
+// CREATE (WORKOUT)
+app.post("/exerciseApp/api/workouts", async (req, res) => {
+    console.log("hit the workout create route");
+    const {name, exercises} = req.body.workout;
+
+    const newWorkout = new Workout(
+        {
+            id: v4(),
+            name,
+            description: `
+                Testing creating a new custom workout.
+            `,
+            image: "https://media.self.com/photos/61bcd0e05aed92fc4251b026/4:3/w_2560%2Cc_limit/GettyImages-1213234926.jpeg",
+            duration: "15 mins",
+            difficulty: "Advanced",
+            equipment: "No equipment",
+            type: "HIIT",
+            format: "Individual workout",
+            bodyArea: "Full body",
+            trainingSet: exercises,
+            goals: ["Shape & tone", "Weight loss"]
+        }
+    );
+
+    try {
+        const createdWorkout = await newWorkout.save();
+        console.log("successfully saved new CUSTOM workout to DB");
+        return res.status(200).json(createdWorkout);
+    } catch(e) {
+        console.log("error trying to save custom workout to DB");
+        return res.status(400).json({message: "error trying to create workout"});
+    }
+
 });
 
 
