@@ -220,8 +220,7 @@ app.get("/exerciseApp/api/exercises", async (req, res) => {
 
 // CREATE (WORKOUT)
 app.post("/exerciseApp/api/workouts", async (req, res) => {
-    console.log("hit the workout create route");
-    const {name, exercises} = req.body.workout;
+    const {name, exercises, user_id} = req.body.workout;
 
     const newWorkout = new Workout(
         {
@@ -243,9 +242,11 @@ app.post("/exerciseApp/api/workouts", async (req, res) => {
     );
 
     try {
-        const createdWorkout = await newWorkout.save();
-        console.log("successfully saved new CUSTOM workout to DB");
-        return res.status(200).json(createdWorkout);
+        const user = await User.findById(user_id);
+        user.customWorkouts.push(newWorkout);
+        await user.save();
+        console.log("successfully saved new CUSTOM workout to user");
+        return res.status(200).json(newWorkout);
     } catch(e) {
         console.log("error trying to save custom workout to DB");
         return res.status(400).json({message: "error trying to create workout"});

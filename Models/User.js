@@ -16,7 +16,8 @@ const userSchema = new Schema({
     ],
     current: [
         {type: mongoose.Types.ObjectId, ref: "Workout"}
-    ]
+    ],
+    customWorkouts: Array
 });
 
 const User = mongoose.model("User", userSchema);
