@@ -58,7 +58,8 @@ app.post("/exerciseApp/api/user/login", async (req, res) => {
                                         joinDate: user.joinDate,
                                         favourites: user.favourites,
                                         completed: user.completed,
-                                        current: user.current
+                                        current: user.current,
+                                        customWorkouts: user.customWorkouts
                                     });
         } else {
             return res.status(400).json({message: "invalid email or password"});
