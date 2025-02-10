@@ -126,15 +126,16 @@ app.get("/exerciseApp/api/workouts", async (req, res) => {
 // WORKOUTS - COMPLETED
 app.post("/exerciseApp/api/workouts/completed", async (req, res) => {
     console.log("hit the workout completed route");
-    const {userId, workoutId} = req.body;
-
+    const {userId, workout} = req.body;
+    
     try {
         const foundUser = await User.findById(userId);
-        const isCompleted = foundUser.completed.some(c => c.toString() == workoutId);
+        const isCompleted = foundUser.completed.some(c => c && c.toString() == workout._id);
 
         if (!isCompleted) {
             console.log("workout not completed yet, adding to completed...");
-            const foundWorkout = await Workout.findById(workoutId);
+
+            const foundWorkout = workout.custom_workout ? foundUser.customWorkouts.find(w => w._id.toString() == workout._id) : await Workout.findById(workout._id);
             foundUser.completed.push(foundWorkout);
             await foundUser.save();
             console.log("successfully saved completed workout");
@@ -144,14 +145,14 @@ app.post("/exerciseApp/api/workouts/completed", async (req, res) => {
         }
 
         const updatedCurrentWorkouts = foundUser.current.filter(c => {
-            return c.toString() != workoutId;
+            return c.toString() != workout._id;
         });
 
         foundUser.current = updatedCurrentWorkouts;
         await foundUser.save();
         console.log("updated current workouts for user");
     } catch(e) {
-        console.log("error trying to save completed workout");
+        console.log("error trying to save completed workout ", e);
         return res.status(400).json({message: "error trying to save completed workout"});
     }
 
@@ -238,7 +239,8 @@ app.post("/exerciseApp/api/workouts", async (req, res) => {
             format: "Individual workout",
             bodyArea: "Full body",
             trainingSet: exercises,
-            goals: ["Shape & tone", "Weight loss"]
+            goals: ["Shape & tone", "Weight loss"],
+            custom_workout: true
         }
     );
 

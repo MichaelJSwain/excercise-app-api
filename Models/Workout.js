@@ -12,7 +12,8 @@ const workoutSchema = new Schema({
     format: String,
     bodyArea: String,
     trainingSet: Array,
-    goals: Array
+    goals: Array,
+    custom_workout: Boolean
 });
 
 const Workout = mongoose.model("Workout", workoutSchema);
